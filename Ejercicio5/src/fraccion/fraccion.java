@@ -55,6 +55,29 @@ public class fraccion {
 		return  divide;
 	}
 	
+	private int mcd(int num,int den) {
+		int u = Math.abs(num);
+		int v = Math.abs(den);
+		if (v == 0) {
+			return u;
+		}
+		int r;
+		while (v!=0) {
+			r = u%v;
+			u=v;
+			v=r;
+		}
+		return u;
+	}
+	
+	
+	public fraccion simplificar() {
+		int maximoComunDivisor = mcd(num,den);
+		fraccion simpl= new fraccion(num/maximoComunDivisor,den/maximoComunDivisor);
+		return simpl;
+	}
+	
+	
 
 	public String toString() {
 		return num + "/" + den;

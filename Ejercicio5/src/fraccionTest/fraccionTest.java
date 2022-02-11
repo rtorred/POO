@@ -16,6 +16,8 @@ public class fraccionTest {
 		System.out.println(multiplica);
 		fraccion divide = f1.dividir(f2);
 		System.out.println(divide);
+		
+		System.out.println(suma.simplificar());
 
 	}
 
