@@ -7,19 +7,9 @@ public class Empleado {
 	private double sueldoBase;
 	private static int horasExtras;
 	private double irpf;
-	private boolean casado;
+	private String casado;
 	private int hijo;
-	
-	public Empleado(String nif, String nombre, double sueldoBase, double irpf, boolean casado,
-			int hijo) {
-		super();
-		this.nif = nif;
-		this.nombre = nombre;
-		this.sueldoBase = sueldoBase;
-		this.irpf = irpf;
-		this.casado = casado;
-		this.hijo = hijo;
-	}
+	private static double importeHora;
 
 	public Empleado(String dni) {
 		super();
@@ -75,11 +65,11 @@ public class Empleado {
 		this.irpf = irpf;
 	}
 
-	public boolean isCasado() {
+	public String esCasado() {
 		return casado;
 	}
 
-	public void setCasado(boolean casado) {
+	public void setCasado(String casado) {
 		this.casado = casado;
 	}
 
@@ -91,9 +81,52 @@ public class Empleado {
 		this.hijo = hijo;
 	}
 	
+	public static double getimporteHora() {
+		return importeHora;
+	}
+
+	public void setimporteHora(int importeHora) {
+		Empleado.importeHora=importeHora;
+	}
+
+
+	public String toString() {
+		return nif+nombre+ 
+				"\n"+"Sueldo Base : "+ sueldoBase+
+				"\n"+"Horas Extras : " + horasExtras+
+				"\n"+"tipo IRPF : "+ irpf+
+				"\n"+"Casado : "+
+				"\n"+"Numero de Hijos : "+ hijo;
+	}
+	
+	public double calcularImporteHorasExtras(){
+        return horasExtras * importeHora;
+    }
+	
+	public double complementoHorasExtras() {
+		double complemento=horasExtras*importeHora;
+		return complemento;
+	}
+	
+	public double sueldoBruto() {
+		double sueldo= sueldoBase+complementoHorasExtras();
+		return sueldo;
+	}
 	
 	
+	public double retencionesIRPF() {
+		if (casado=="S") {
+			return sueldoBruto()*((irpf-hijo)/100);
+		} else {
+			return sueldoBruto()*(irpf/100);
+		}
+	}
 	
+	public double calculaSueldo() {
+		return sueldoBruto()-retencionesIRPF();
+	}
+	
+
 	
 	
 	
