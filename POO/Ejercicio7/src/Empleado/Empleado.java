@@ -91,7 +91,8 @@ public class Empleado {
 
 
 	public String toString() {
-		return nif+nombre+ 
+		return "\n"+"------------------------------"+
+				nif+" "+nombre+ 
 				"\n"+"Sueldo Base : "+ sueldoBase+
 				"\n"+"Horas Extras : " + horasExtras+
 				"\n"+"tipo IRPF : "+ irpf+

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Empleado.Empleado;
 
 public class EmpleadoTest {
-	
+	static int nEmpleados;
 	static Empleado[] empleados = new Empleado[20];
 	static Scanner sn = new Scanner(System.in);
 	
@@ -17,14 +17,14 @@ public class EmpleadoTest {
         double IRPF;
         String casado;
         int nHijos;
-        int i, nEmpleados;
+        int i;
         
         do {
 			System.out.println("cuantos empleados tenemos?");
 			nEmpleados=sn.nextInt();
 		} while (nEmpleados<0 || nEmpleados>20);
         
-        for (i = 0; i <=nEmpleados; i++) {
+        for (i = 0; i < nEmpleados; i++) {
         	sn.nextLine();
             System.out.println("Empleado " + i);
             System.out.print("Nif: ");
@@ -55,7 +55,7 @@ public class EmpleadoTest {
 	}
 	
 	public static void muestraEmpleados() {
-		for (int i = 0; i < empleados.length; i++) {
+		for (int i = 0; i <nEmpleados; i++) {
 			System.out.println(empleados[i]);
 		}
 	}
@@ -63,7 +63,7 @@ public class EmpleadoTest {
 
 	public static Empleado empleadoMasCobra() {
 		Empleado rico = empleados[0];
-		for (int i = 0; i <=empleados.length; i++) {
+		for (int i = 0; i < nEmpleados; i++) {
 			if (rico.calculaSueldo()<empleados[i].calculaSueldo()) {
 				rico=empleados[i];
 			}
@@ -73,7 +73,7 @@ public class EmpleadoTest {
 	
 	public static Empleado empleadoMenosCobra() {
 		Empleado pobre = empleados[0];
-		for (int i = 0; i <=empleados.length; i++) {
+		for (int i = 0; i < nEmpleados; i++) {
 			if (pobre.calculaSueldo()<empleados[i].calculaSueldo()) {
 				pobre=empleados[i];
 			}
@@ -89,7 +89,7 @@ public class EmpleadoTest {
 	
 	public static Empleado empleadoQueMasCobraPorExplotado() {
         Empleado rico = empleados[0];
-        for (int i = 1; i < empleados.length; i++) {
+        for (int i = 1; i <nEmpleados; i++) {
             if (empleados[i].calcularImporteHorasExtras() > rico.calcularImporteHorasExtras()) {
             	rico = empleados[i];
             }
@@ -99,7 +99,7 @@ public class EmpleadoTest {
 	
 	public static Empleado empleadoQueMenosCobraPorExplotado() {
         Empleado pobre = empleados[0];
-        for (int i = 1; i < empleados.length; i++) {
+        for (int i = 1; i <nEmpleados; i++) {
             if (empleados[i].calcularImporteHorasExtras() < pobre.calcularImporteHorasExtras()) {                 
             	pobre = empleados[i];
             }
@@ -109,8 +109,8 @@ public class EmpleadoTest {
 	
 	public static void ordenarEmpleados() {
 			Empleado aux;
-			for (int i = 0; i < empleados.length-1; i++) {
-				for (int j = 0; j < empleados.length-i-1; j++) {
+			for (int i = 0; i < nEmpleados-1; i++) {
+				for (int j = 0; j < nEmpleados-i-1; j++) {
 					if (empleados[j + 1].calculaSueldo() < empleados[j].calculaSueldo()) {
 						aux = empleados[j + 1];
 	                    empleados[j + 1] = empleados[j];
@@ -125,11 +125,20 @@ public class EmpleadoTest {
 
 	public static void main(String[] args) {
 		introduceEmpreados();
-		empleadoMasCobra();
-		empleadoMenosCobra();
-		empleadoQueMasCobraPorExplotado();
-		empleadoQueMenosCobraPorExplotado();
+		System.out.println("--------------------------");
 		muestraEmpleados();
+		System.out.println("--------------------------");
+		System.out.println("El empleado que mas cobra es :");
+		empleadoMasCobra();
+		System.out.println("El empleado que menos cobra es :");
+		empleadoMenosCobra();
+		System.out.println("El empleado mas explotado y por ello mas rico es :");
+		empleadoQueMasCobraPorExplotado();
+		System.out.println("El empleado menos explotado y por ello mas pobre es :");
+		empleadoQueMenosCobraPorExplotado();
+		System.out.println("--------------------------");
+		muestraEmpleados();
+		System.out.println("Empleados ordenados por salario :");
 		ordenarEmpleados();
 		
 
